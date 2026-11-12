@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CROWN MOTORS PREMIUM | Administration</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+background:#080808;
+color:#fff;
+font-family:Arial,sans-serif;
+}
+header{
+padding:22px;
+background:#111;
+border-bottom:2px solid #d8b45d;
+}
+h1{
+margin:0;
+color:#d8b45d;
+font-family:Georgia,serif;
+letter-spacing:3px;
+}
+header p{color:#aaa;font-size:12px}
+main{max-width:950px;margin:auto;padding:22px}
+h2{color:#e5c36b}
+.dashboard{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+.card{
+padding:20px;
+background:#171717;
+border:1px solid #57451e;
+border-radius:12px;
+}
+.card strong{display:block;font-size:25px;color:#e5c36b}
+.card span{color:#bbb;font-size:12px}
+.actions{display:grid;gap:12px;margin-top:25px}
+button{
+padding:14px;
+border:1px solid #d8b45d;
+border-radius:8px;
+background:#d8b45d;
+color:#111;
+font-weight:bold;
+}
+.secondary{background:#171717;color:#e5c36b}
+.notice{
+margin-top:22px;
+padding:15px;
+border:1px solid #57451e;
+border-radius:8px;
+color:#ccc;
+font-size:13px;
+line-height:1.7;
+}
+a{color:#e5c36b}
+@media(max-width:500px){
+.dashboard{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>♛ CROWN MOTORS</h1>
+<p>PREMIUM ADMINISTRATION</p>
+</header>
+<main>
+<h2>Tableau de bord</h2>
+<div class="dashboard">
+<div class="card">
+<strong>8</strong>
+<span>Véhicules au catalogue initial</span>
+</div>
+<div class="card">
+<strong>6</strong>
+<span>Véhicules disponibles initialement</span>
+</div>
+<div class="card">
+<strong>2</strong>
+<span>Véhicules vendus initialement</span>
+</div>
+<div class="card">
+<strong>FCFA</strong>
+<span>Devise du catalogue</span>
+</div>
+</div>
+<h2>Gestion du catalogue</h2>
+<div class="actions">
+<button onclick="alert('Le module de gestion sera installé à la prochaine étape.')">
+＋ Ajouter un véhicule
+</button>
+<button class="secondary" onclick="location.href='index.html'">
+Voir le site public
+</button>
+</div>
+<div class="notice">
+<strong>ESPACE ADMINISTRATEUR</strong><br>
+Cette interface est une première maquette visuelle.
+La gestion réelle des véhicules et la connexion sécurisée
+seront ajoutées dans les prochaines étapes.
+Ne publiez pas de données confidentielles ici.
+</div>
+</main>
+</body>
+</html>
