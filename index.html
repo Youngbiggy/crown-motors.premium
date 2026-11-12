@@ -181,6 +181,54 @@ footer a{display:block;margin:7px 0}
 .tool-btn{flex:1}
 #sortCars{width:100%}
 }
+  
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.contact-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.contact-buttons a:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+}
+
+.contact-buttons .main-wa,
+.contact-buttons .manager-wa {
+  background: #167b4b;
+  color: white;
+}
+
+.contact-buttons .email-btn {
+  background: #171717;
+  color: #d8b45d;
+  border: 1px solid #d8b45d;
+}
+
+@media(max-width:600px) {
+  .contact-buttons {
+    flex-direction: column;
+  }
+
+  .contact-buttons a {
+    width: 100%;
+  }
+}
 </style>
 </head>
 
@@ -319,15 +367,39 @@ footer a{display:block;margin:7px 0}
 </section>
 
 <section class="section" id="contact">
+
 <div class="container">
-<div class="contact">
-<p class="eyebrow">CONTACTEZ-NOUS</p>
-<h2>Parlons de votre prochaine voiture.</h2>
-<p>Notre équipe est disponible pour répondre à vos questions.</p>
-<a class="gold-button" href="https://wa.me/22892354141?text=Bonjour%20CROWN%20MOTORS%20PREMIUM%2C%20je%20souhaite%20des%20informations.">◉ WHATSAPP CROWN MOTORS</a>
-<p>Responsable : <a href="https://wa.me/22871215444">+228 71 21 54 44</a></p>
-<p>Email : <a href="mailto:j.brentadjanor@yahoo.com">j.brentadjanor@yahoo.com</a></p>
-</div>
+  <div class="contact">
+    <p class="eyebrow">CONTACTEZ-NOUS</p>
+
+    <h2>Parlons de votre prochaine voiture.</h2>
+
+    <p>
+      Notre équipe est disponible pour répondre
+      à toutes vos questions.
+    </p>
+
+    <div class="contact-buttons">
+
+      <a class="main-wa"
+         href="https://wa.me/22892354141"
+         target="_blank">
+        ◉ WhatsApp CROWN MOTORS
+      </a>
+
+      <a class="manager-wa"
+         href="https://wa.me/22871215444"
+         target="_blank">
+        ◉ WhatsApp Responsable
+      </a>
+
+      <a class="email-btn"
+         href="mailto:j.brentadjanor@yahoo.com">
+        ✉ Envoyer un e-mail
+      </a>
+
+    </div>
+  </div>
 </div>
 </section>
 </main>
