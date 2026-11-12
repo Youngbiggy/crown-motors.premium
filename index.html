@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="CROWN MOTORS Premium - Vente automobile au Togo.">
+<title>CROWN MOTORS | Premium Automobile</title>
+
+<style>
+:root {
+  --black:#080808;
+  --panel:#141414;
+  --gold:#d5b15c;
+  --white:#fff;
+  --muted:#aaa;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  background:var(--black);
+  color:var(--white);
+  font-family:Arial,sans-serif;
+}
+a {color:inherit;text-decoration:none}
+button {font:inherit;cursor:pointer}
+
+/* HEADER */
+header {
+  height:75px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #40351e;
+  background:#080808;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.logo {
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-size:23px;
+  letter-spacing:3px;
+  font-weight:bold;
+}
+.logo small {
+  display:block;
+  font:9px Arial;
+  text-align:center;
+  letter-spacing:6px;
+  margin-top:5px;
+}
+.menu-button {
+  background:none;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  border-radius:8px;
+  padding:9px 13px;
+  font-size:22px;
+}
+.drawer {
+  display:none;
+  position:fixed;
+  z-index:30;
+  top:75px;
+  right:0;
+  width:min(310px,85%);
+  height:calc(100vh - 75px);
+  background:#111;
+  padding:25px;
+  border-left:1px solid var(--gold);
+}
+.drawer.open {display:block}
+.drawer a {
+  display:block;
+  padding:16px 5px;
+  border-bottom:1px solid #333;
+  color:white;
+}
+.drawer a:hover {color:var(--gold)}
+.overlay {
+  display:none;
+  position:fixed;
+  inset:75px 0 0;
+  background:#000b;
+  z-index:25;
+}
+.overlay.open {display:block}
+
+/* HERO */
+.hero {
+  min-height:540px;
+  display:flex;
+  align-items:center;
+  padding:65px 8%;
+  background:
+  linear-gradient(90deg,#080808 5%,#080808dc 48%,#08080840),
+  url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85")
+  center/cover;
+}
+.hero-content {max-width:650px}
+.eyebrow {
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:11px;
+  font-weight:bold;
+}
+h1 {
+  font:clamp(40px,7vw,72px)/1.1 Georgia,serif;
+  margin:20px 0;
+}
+h1 span {color:var(--gold)}
+.hero p {color:#ddd;line-height:1.8}
+.gold-button {
+  display:inline-block;
+  background:var(--gold);
+  color:#111;
+  font-weight:bold;
+  padding:15px 24px;
+  border-radius:4px;
+  margin-top:18px;
+}
+
+/* SECTIONS */
+section {padding:65px 6%}
+.section-title {
+  text-align:center;
+  margin-bottom:35px;
+}
+.section-title h2 {
+  font:clamp(27px,5vw,40px) Georgia,serif;
+}
+.section-title span {color:var(--gold)}
+.section-title p {color:var(--muted)}
+
+/* SERVICES */
+.services {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.service {
+  background:var(--panel);
+  border:1px solid #40351e;
+  padding:25px;
+  text-align:center;
+  border-radius:10px;
+}
+.service .symbol {
+  color:var(--gold);
+  font-size:30px;
+}
+.service h3 {color:var(--gold)}
+.service p {color:var(--muted);font-size:13px}
+
+/* CATALOGUE */
+.catalogue {
+  background:#101010;
+}
+.search {
+  display:block;
+  width:100%;
+  max-width:450px;
+  margin:0 auto 30px;
+  padding:14px;
+  background:#202020;
+  color:white;
+  border:1px solid #66552f;
+  border-radius:7px;
+}
+.cars {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.car {
+  background:#181818;
+  border:1px solid #3b321f;
+  border-radius:9px;
+  overflow:hidden;
+}
+.car img {
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  background:#222;
+}
+.car-info {padding:16px}
+.car h3 {margin:0 0 10px}
+.price {
+  color:var(--gold);
+  font-weight:bold;
+  font-size:18px;
+}
+.car-info p {color:var(--muted);font-size:13px}
+.sold {
+  display:inline-block;
+  background:#a31532;
+  color:white;
+  padding:5px 10px;
+  font-size:11px;
+  margin-bottom:8px;
+}
+.car-link {
+  display:block;
+  text-align:center;
+  padding:12px;
+  background:#302718;
+  color:var(--gold);
+  border-radius:5px;
+  margin-top:12px;
+}
+.empty {text-align:center;color:var(--muted)}
+
+/* ABOUT AND CONTACT */
+.about {
+  text-align:center;
+  max-width:800px;
+  margin:auto;
+}
+.about p {color:#bbb;line-height:1.9}
+.contact {
+  background:linear-gradient(120deg,#201a0e,#111);
+  text-align:center;
+  border-top:1px solid #574623;
+  border-bottom:1px solid #574623;
+}
+.contact h2 {font:36px Georgia,serif}
+footer {
+  text-align:center;
+  padding:30px 15px;
+  color:#999;
+  font-size:12px;
+}
+footer span {color:var(--gold)}
+
+@media(max-width:800px) {
+  .cars {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .services {grid-template-columns:1fr}
+}
+@media(max-width:480px) {
+  header {padding:0 16px}
+  .hero {min-height:480px;padding:40px 22px}
+  section {padding:48px 17px}
+  .cars {grid-template-columns:1fr 1fr;gap:9px}
+  .car img {height:125px}
+  .car-info {padding:10px}
+  .car h3 {font-size:13px}
+  .price {font-size:14px}
+  .car-info p {font-size:11px}
+  .car-link {font-size:11px;padding:10px 5px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#accueil" class="logo">
+    ♛ CROWN
+    <small>MOTORS</small>
+  </a>
+  <button class="menu-button" id="menuButton"
+    aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+</header>
+
+<div class="overlay" id="overlay"></div>
+<nav class="drawer" id="drawer">
+  <a href="#accueil">Accueil</a>
+  <a href="#catalogue">Nos véhicules</a>
+  <a href="#services">Nos services</a>
+  <a href="#apropos">À propos</a>
+  <a href="#contact">Contact</a>
+  <a href="admin/login.html">Administration</a>
+</nav>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <div class="eyebrow">L'ART DE CONDUIRE</div>
+    <h1>L'excellence<br>
+      <span>automobile.</span>
+    </h1>
+    <p>
+      Découvrez notre sélection de véhicules.
+      Trouvez la voiture qui correspond à votre
+      style, vos envies et votre budget.
+    </p>
+    <a class="gold-button" href="#catalogue">
+      EXPLORER NOS VÉHICULES →
+    </a>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-title">
+    <div class="eyebrow">CROWN MOTORS</div>
+    <h2>Nos <span>services</span></h2>
+    <p>Une expérience automobile personnalisée.</p>
+  </div>
+  <div class="services">
+    <article class="service">
+      <div class="symbol">♛</div>
+      <h3>Vente automobile</h3>
+      <p>Une sélection de voitures pour différents budgets.</p>
+    </article>
+    <article class="service">
+      <div class="symbol">◇</div>
+      <h3>Accompagnement</h3>
+      <p>Des échanges directs pour vous aider dans votre choix.</p>
+    </article>
+    <article class="service">
+      <div class="symbol">✧</div>
+      <h3>Conseil personnalisé</h3>
+      <p>Un accompagnement adapté à vos besoins.</p>
+    </article>
+  </div>
+</section>
+
+<section class="catalogue" id="catalogue">
+  <div class="section-title">
+    <div class="eyebrow">NOTRE SÉLECTION</div>
+    <h2>Nos <span>véhicules</span></h2>
+    <p>Découvrez les modèles proposés par CROWN MOTORS.</p>
+  </div>
+  <input class="search" id="search"
+    placeholder="Rechercher une voiture...">
+  <div class="cars" id="cars"></div>
+</section>
+
+<section id="apropos">
+  <div class="about">
+    <div class="eyebrow">NOTRE IDENTITÉ</div>
+    <h2>Bienvenue chez <span style="color:#d5b15c">CROWN MOTORS</span></h2>
+    <p>
+      CROWN MOTORS vous accompagne dans la découverte
+      de véhicules adaptés à vos attentes.
+      Notre ambition : vous proposer une expérience
+      automobile simple, transparente et professionnelle.
+    </p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="eyebrow">CONTACTEZ-NOUS</div>
+  <h2>Votre prochaine voiture commence ici.</h2>
+  <p>Échangez directement avec notre équipe.</p>
+  <a class="gold-button"
+    href="https://wa.me/22871215444"
+    target="_blank" rel="noopener">
+    CONTACTER SUR WHATSAPP
+  </a>
+</section>
+</main>
+
+<footer>
+  <div class="logo">♛ CROWN MOTORS</div>
+  <p>Votre partenaire automobile au Togo.</p>
+  <p>© <span id="year"></span> CROWN MOTORS. Tous droits réservés.</p>
+</footer>
+
+<script>
+const cars = [
+  {
+    name:"Kia Optima 2016",
+    price:5500000,
+    status:"Disponible",
+    image:"https://i.postimg.cc/JzNQ1nJY/640e16e5-abc6-477e-a606-8a7f54808a8e.jpg"
+  },
+  {
+    name:"Hyundai Sonata 2016",
+    price:7000000,
+    status:"Vendu",
+    image:"https://i.postimg.cc/Wz9Vkx1N/a865665a-a190-46b5-be2b-db5eded47353.jpg"
+  },
+  {
+    name:"Toyota Corolla SE 2018",
+    price:6500000,
+    status:"Disponible",
+    image:"https://i.postimg.cc/63f33kz5/IMG-1470.png"
+  },
+  {
+    name:"Hyundai Veloster 2013",
+    price:2800000,
+    status:"Vendu",
+    image:"https://i.postimg.cc/zGbHPB3n/2185b1a8-ea2a-4182-b87d-6ab078084a92.jpg"
+  },
+  {
+    name:"Kia Sportage 2012",
+    price:5000000,
+    status:"Disponible",
+    image:"https://i.postimg.cc/gjFZ2cMX/81a1679c-1723-4924-83ae-ea50ea73663a.jpg"
+  },
+  {
+    name:"BMW E46 2001",
+    price:1650000,
+    status:"Disponible",
+    image:"https://i.postimg.cc/rmRdTL3K/f3a88b09-6e1b-482c-b819-c184827b8fbf.jpg"
+  },
+  {
+    name:"Dodge Challenger 2019",
+    price:15000000,
+    status:"Disponible",
+    image:"https://i.postimg.cc/5tbdQF2G/2785d2ab-6ac0-4d5c-a33e-beb5a4befc34.jpg"
+  },
+  {
+    name:"BMW Série 3 E90 2012",
+    price:2650000,
+    status:"Disponible",
+    image:""
+  }
+];
+
+const carsContainer=document.getElementById("cars");
+
+function displayCars(list) {
+  carsContainer.innerHTML="";
+  if(!list.length) {
+    carsContainer.innerHTML='<p class="empty">Aucun véhicule trouvé.</p>';
+    return;
+  }
+
+  list.forEach(car=>{
+    const card=document.createElement("article");
+    card.className="car";
+
+    const img=document.createElement("img");
+    img.src=car.image || "";
+    img.alt=car.name;
+    img.loading="lazy";
+    img.onerror=()=>{img.style.display="none"};
+
+    const info=document.createElement("div");
+    info.className="car-info";
+
+    const name=document.createElement("h3");
+    name.textContent=car.name;
+
+    const price=document.createElement("div");
+    price.className="price";
+    price.textContent=new Intl.NumberFormat("fr-FR")
+      .format(car.price)+" FCFA";
+
+    const status=document.createElement("p");
+    status.textContent=car.status;
+
+    if(car.status==="Vendu") {
+      status.className="sold";
+    }
+
+    const link=document.createElement("a");
+    link.className="car-link";
+    link.href="https://wa.me/22871215444?text="
+      +encodeURIComponent("Bonjour CROWN MOTORS, je souhaite des informations sur "+car.name);
+    link.target="_blank";
+    link.rel="noopener";
+    link.textContent=car.status==="Vendu"
+      ?"Demander un modèle similaire":"Demander des informations";
+
+    info.append(name,price,status,link);
+    card.append(img,info);
+    carsContainer.append(card);
+  });
+}
+
+displayCars(cars);
+
+document.getElementById("search").addEventListener("input",event=>{
+  const query=event.target.value.toLowerCase();
+  displayCars(cars.filter(car=>car.name.toLowerCase().includes(query)));
+});
+
+const menu=document.getElementById("drawer");
+const overlay=document.getElementById("overlay");
+const menuButton=document.getElementById("menuButton");
+
+function closeMenu(){
+  menu.classList.remove("open");
+  overlay.classList.remove("open");
+  menuButton.setAttribute("aria-expanded","false");
+}
+menuButton.addEventListener("click",()=>{
+  const open=menu.classList.toggle("open");
+  overlay.classList.toggle("open",open);
+  menuButton.setAttribute("aria-expanded",String(open));
+});
+overlay.addEventListener("click",closeMenu);
+menu.querySelectorAll("a").forEach(link=>{
+  link.addEventListener("click",closeMenu);
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
