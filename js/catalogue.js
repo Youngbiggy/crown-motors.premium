@@ -145,21 +145,3 @@ description:"BMW Série 3 E90 2012. Boîte manuelle.",
 images:[]
 }
 ]; 
-{
-    "id": "toyota-landcruiser-prado-txl",
-    "name": "Toyota LandCruiser Prado TXL",
-    "make": "Toyota",
-    "year": 2016,
-    "price": 15000000,
-    "category": "SUV & 4x4",
-    "fuel": "Essence",
-    "transmission": "Automatique",
-    "color": "Noir",
-    "description": "Toyota LandCruiser Prado. Boîte automatique.",
-    "images": [
-      "https://i.postimg.cc/6Q7kGHQB/3a1a88c7-969c-4362-9a79-d07012a90d5f.jpg",
-      "https://i.postimg.cc/jjWpJ8jT/8a729ba5-3b5e-47a7-a7d7-2000d8b75092.jpg",
-      "https://i.postimg.cc/9f46qxfV/a5f51ba1-e391-480f-b202-1d27b31f853f.jpg",
-      "https://i.postimg.cc/9f46qxfC/93b4f26a-5bc4-4f66-8054-50f8db63a6a4.jpg"
-    ]
-  },
