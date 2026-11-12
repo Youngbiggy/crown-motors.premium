@@ -270,6 +270,136 @@ padding:20px;background:#151515;border:1px solid var(--gold);border-radius:12px;
 .tool-btn{flex:1}
 #sortCars{width:100%}
 }
+  
+/* CROWN AI ASSISTANT */
+.ai-launcher {
+  position:fixed;
+  right:18px;
+  bottom:20px;
+  z-index:1000;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#f4db91,#c49b42);
+  color:#080808;
+  border:2px solid #fff0b0;
+  font-size:27px;
+  box-shadow:0 5px 25px #d8b45d55;
+}
+
+.ai-panel {
+  display:none;
+  position:fixed;
+  right:15px;
+  bottom:95px;
+  width:min(390px,calc(100% - 30px));
+  height:min(570px,75vh);
+  z-index:1001;
+  background:#101010;
+  border:1px solid #d8b45d;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 40px #000;
+  flex-direction:column;
+}
+
+.ai-panel.open {display:flex}
+
+.ai-header {
+  padding:16px;
+  background:#1a160d;
+  border-bottom:1px solid #d8b45d;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.ai-header strong {color:#f4db91}
+
+.ai-header small {
+  display:block;
+  color:#aaa;
+  font-size:10px;
+}
+
+.ai-close {
+  background:none;
+  border:1px solid #d8b45d;
+  color:white;
+  padding:7px 12px;
+  border-radius:6px;
+}
+
+.ai-messages {
+  flex:1;
+  overflow-y:auto;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.ai-message {
+  padding:12px;
+  border-radius:12px;
+  font-size:13px;
+  max-width:90%;
+  white-space:pre-line;
+}
+
+.ai-bot {
+  background:#222;
+  border:1px solid #554524;
+  align-self:flex-start;
+}
+
+.ai-user {
+  background:#8e7135;
+  color:white;
+  align-self:flex-end;
+}
+
+.ai-suggestions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  padding:10px;
+}
+
+.ai-suggestions button {
+  background:#171717;
+  color:#e8cc82;
+  border:1px solid #80652d;
+  border-radius:20px;
+  padding:8px 11px;
+  font-size:11px;
+}
+
+.ai-form {
+  display:flex;
+  gap:7px;
+  padding:12px;
+  border-top:1px solid #493b20;
+}
+
+.ai-form input {
+  flex:1;
+  min-width:0;
+  padding:12px;
+  background:#222;
+  border:1px solid #66522b;
+  border-radius:8px;
+  color:white;
+}
+
+.ai-form button {
+  background:#d8b45d;
+  color:#111;
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  font-weight:bold;
+}
 </style>
 </head>
 
@@ -772,6 +902,193 @@ $("year").textContent=new Date().getFullYear();
 
 render();
 </script>
+
+<button class="ai-launcher" id="aiLauncher"
+aria-label="Ouvrir l'assistant CROWN AI">♛</button>
+
+<div class="ai-panel" id="aiPanel">
+
+  <div class="ai-header">
+    <div>
+      <strong>♛ CROWN AI ASSISTANT</strong>
+      <small>Votre conseiller automobile</small>
+    </div>
+    <button class="ai-close" id="aiClose">✕</button>
+  </div>
+
+  <div class="ai-messages" id="aiMessages">
+    <div class="ai-message ai-bot">
+      Bienvenue chez CROWN MOTORS PREMIUM !
+
+      Je suis votre assistant automobile.
+
+      Comment puis-je vous aider aujourd'hui ?
+    </div>
+  </div>
+
+  <div class="ai-suggestions">
+    <button data-question="Quels véhicules sont disponibles ?">🚘 Véhicules disponibles</button>
+    <button data-question="Je cherche un SUV">SUV</button>
+    <button data-question="Je cherche une voiture à moins de 5 millions">Mon budget</button>
+    <button data-question="Je souhaite contacter un commercial">☎ Commercial</button>
+  </div>
+
+  <form class="ai-form" id="aiForm">
+    <input id="aiInput" type="text"
+    placeholder="Posez votre question..." required>
+    <button type="submit">➤</button>
+  </form>
+
+</div>
+
+/* CROWN AI - ASSISTANT AUTOMOBILE */
+
+const aiLauncher = document.getElementById("aiLauncher");
+const aiPanel = document.getElementById("aiPanel");
+const aiMessages = document.getElementById("aiMessages");
+const aiForm = document.getElementById("aiForm");
+const aiInput = document.getElementById("aiInput");
+
+aiLauncher.onclick = () => {
+  aiPanel.classList.toggle("open");
+};
+
+document.getElementById("aiClose").onclick = () => {
+  aiPanel.classList.remove("open");
+};
+
+function aiMessage(text, type="bot") {
+  const div = document.createElement("div");
+  div.className = "ai-message ai-" + type;
+  div.textContent = text;
+  aiMessages.appendChild(div);
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function aiAnswer(question) {
+  const q = question.toLowerCase();
+  const available = cars.filter(c => c.status !== "sold");
+  const sold = cars.filter(c => c.status === "sold");
+
+  if (
+    q.includes("bonjour") ||
+    q.includes("salut") ||
+    q.includes("bonsoir")
+  ) {
+    return "Bienvenue chez CROWN MOTORS PREMIUM ! 👑\n\nJe peux vous aider à trouver votre prochaine voiture.";
+  }
+
+  if (
+    q.includes("disponible") ||
+    q.includes("catalogue") ||
+    q.includes("véhicule") ||
+    q.includes("voiture")
+  ) {
+    const matches = available.filter(c => {
+      return q.includes("suv")
+        ? c.category.toLowerCase() === "suv"
+        : q.includes("berline")
+        ? c.category.toLowerCase() === "berline"
+        : true;
+    });
+
+    if (!matches.length) {
+      return "Je n'ai pas trouvé de véhicule correspondant actuellement.";
+    }
+
+    return "Voici les véhicules disponibles :\n\n" +
+      matches.slice(0,8).map(c =>
+        "🚘 " + c.name +
+        "\nPrix : " + number(c.price) +
+        "\nAnnée : " + c.year
+      ).join("\n\n") +
+      "\n\nSouhaitez-vous davantage d'informations ?";
+  }
+
+  if (q.includes("budget") || q.includes("million")) {
+    const match = q.match(/(\d+(?:[.,]\d+)?)\s*millions?/);
+    if (match) {
+      const budget = Number(match[1].replace(",", ".")) * 1000000;
+      const results = available.filter(c => c.price <= budget);
+
+      if (!results.length) {
+        return "Aucun véhicule disponible ne correspond à ce budget pour le moment. Contactez notre équipe pour étudier d'autres possibilités.";
+      }
+
+      return "Voici les véhicules dans votre budget :\n\n" +
+        results.map(c =>
+          "🚘 " + c.name + " — " + number(c.price)
+        ).join("\n");
+    }
+
+    return "Quel est votre budget maximum en FCFA ? Je pourrai rechercher les véhicules correspondants.";
+  }
+
+  if (
+    q.includes("vendu") ||
+    q.includes("historique")
+  ) {
+    return sold.length
+      ? "Voici quelques véhicules vendus :\n\n" +
+        sold.map(c => c.name).join("\n")
+      : "Notre historique de ventes sera bientôt disponible.";
+  }
+
+  if (
+    q.includes("contact") ||
+    q.includes("commercial") ||
+    q.includes("whatsapp") ||
+    q.includes("acheter")
+  ) {
+    return "Notre équipe commerciale est à votre disposition.\n\nWhatsApp principal : +228 92 35 41 41\nResponsable : +228 71 21 54 44\n\nVous pouvez contacter directement notre équipe via les liens WhatsApp du site.";
+  }
+
+  if (
+    q.includes("essence") ||
+    q.includes("diesel") ||
+    q.includes("hybride") ||
+    q.includes("électrique")
+  ) {
+    const results = available.filter(c =>
+      c.fuel.toLowerCase().includes(q.includes("électrique") ? "électrique" : q.includes("hybride") ? "hybride" : q.includes("diesel") ? "diesel" : "essence")
+    );
+
+    return results.length
+      ? "Voici les véhicules correspondants :\n\n" +
+        results.map(c => c.name + " — " + number(c.price)).join("\n")
+      : "Je n'ai pas trouvé de véhicule de ce type dans le catalogue actuel.";
+  }
+
+  return "Merci pour votre question ! 👑\n\nJe peux vous renseigner sur les véhicules disponibles, les prix, les catégories, les carburants et les contacts commerciaux.\n\nVous pouvez également préciser votre budget pour recevoir des suggestions.";
+}
+
+function askCrownAI(question) {
+  if (!question.trim()) return;
+
+  aiMessage(question, "user");
+
+  const answer = aiAnswer(question);
+
+  setTimeout(() => {
+    aiMessage(answer, "bot");
+  }, 350);
+}
+
+aiForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const question = aiInput.value.trim();
+  if (!question) return;
+
+  aiInput.value = "";
+  askCrownAI(question);
+});
+
+document.querySelectorAll(".ai-suggestions button")
+.forEach(button => {
+  button.addEventListener("click", () => {
+    askCrownAI(button.dataset.question);
+  });
+});
 
 </body>
 </html>
