@@ -247,6 +247,7 @@ footer a{display:block;margin:7px 0}
 <a href="#promotions">Promotions</a>
 <a href="#apropos">À propos</a>
 <a href="#contact">Contact</a>
+<a href="#demande">♛ Demander un véhicule</a>
 </nav>
 <a class="nav-contact" href="https://wa.me/22892354141">WhatsApp</a>
 <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
@@ -262,6 +263,7 @@ footer a{display:block;margin:7px 0}
 <a href="#apropos">À propos</a>
 <a href="#contact">☎ Contact WhatsApp</a>
 <a href="#" id="openAI">♛ CROWN AI Assistant</a>
+  <a href="#espace-client">♛ Mon espace CROWN</a>
 </nav>
 </header>
 
@@ -402,6 +404,176 @@ footer a{display:block;margin:7px 0}
   </div>
 </div>
 </section>
+  
+<!-- DEMANDE DE VEHICULE -->
+<section class="section" id="demande">
+  <div class="container">
+    <div class="contact">
+      <p class="eyebrow">CROWN MOTORS PREMIUM</p>
+      <h2>Votre prochaine voiture commence ici.</h2>
+      <p>Décrivez-nous le véhicule que vous recherchez.</p>
+
+      <form id="vehicleRequest"
+        style="max-width:600px;margin:25px auto;text-align:left">
+
+        <label>Votre nom</label>
+        <input name="nom" required
+          placeholder="Votre nom"
+          style="width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #d8b45d;border-radius:7px">
+
+        <label>Véhicule recherché</label>
+        <input name="modele" required
+          placeholder="Ex : Toyota RAV4, Mercedes..."
+          style="width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #d8b45d;border-radius:7px">
+
+        <label>Budget disponible (FCFA)</label>
+        <input name="budget" type="number" min="0"
+          placeholder="Ex : 8000000"
+          style="width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #d8b45d;border-radius:7px">
+
+        <label>Carburant souhaité</label>
+        <select name="carburant"
+          style="width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #d8b45d;border-radius:7px">
+          <option>Essence</option>
+          <option>Diesel</option>
+          <option>Hybride</option>
+          <option>Électrique</option>
+          <option>Indifférent</option>
+        </select>
+
+        <label>Informations complémentaires</label>
+        <textarea name="details" rows="4"
+          placeholder="Année, couleur, boîte automatique..."
+          style="width:100%;padding:13px;margin:8px 0 15px;background:#202020;color:white;border:1px solid #d8b45d;border-radius:7px"></textarea>
+
+        <button type="submit" class="gold-button"
+          style="width:100%">
+          ENVOYER MA DEMANDE SUR WHATSAPP
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById("vehicleRequest")
+.addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const data = new FormData(this);
+
+  const message =
+    "Bonjour CROWN MOTORS PREMIUM !\n\n"+
+    "NOUVELLE DEMANDE DE VÉHICULE\n\n"+
+    "Nom : "+data.get("nom")+"\n"+
+    "Modèle : "+data.get("modele")+"\n"+
+    "Budget : "+(data.get("budget") || "Non précisé")+" FCFA\n"+
+    "Carburant : "+data.get("carburant")+"\n"+
+    "Informations : "+(data.get("details") || "Aucune");
+
+  const url =
+    "https://wa.me/22892354141?text="+
+    encodeURIComponent(message);
+
+  window.open(url,"_blank");
+});
+</script>
+  
+<!-- ESPACE CLIENT CROWN -->
+<section class="section" id="espace-client">
+  <div class="container">
+    <div class="section-title">
+      <p class="eyebrow">VOTRE UNIVERS PRIVÉ</p>
+      <h2>MON ESPACE <span class="gold">CROWN</span></h2>
+      <p>Retrouvez vos préférences et vos véhicules favoris.</p>
+    </div>
+
+    <div class="about-grid">
+
+      <div class="about-card">
+        <span>♥</span>
+        <h3>Mes favoris</h3>
+        <p>Retrouvez les véhicules que vous avez aimés.</p>
+        <button class="gold-button" onclick="showClientFavorites()">
+          Voir mes favoris
+        </button>
+      </div>
+
+      <div class="about-card">
+        <span>🚘</span>
+        <h3>Mes véhicules consultés</h3>
+        <p>Retrouvez vos dernières visites automobiles.</p>
+        <button class="gold-button" onclick="showClientHistory()">
+          Voir l'historique
+        </button>
+      </div>
+
+      <div class="about-card">
+        <span>✦</span>
+        <h3>CROWN AI</h3>
+        <p>Obtenez des conseils pour choisir votre voiture.</p>
+        <a href="#crown-ai" class="gold-button">
+          Parler à CROWN AI
+        </a>
+      </div>
+
+    </div>
+
+    <div class="details-box" style="margin-top:25px">
+      <h3 class="gold">Mon activité automobile</h3>
+      <p id="clientStats">Chargement de votre espace...</p>
+      <div id="clientResults" class="car-grid"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const CLIENT_HISTORY_KEY = "crown_client_history";
+
+function saveClientVisit(id) {
+  try {
+    let history = JSON.parse(
+      localStorage.getItem(CLIENT_HISTORY_KEY) || "[]"
+    );
+    history = history.filter(item => item !== id);
+    history.unshift(id);
+    localStorage.setItem(
+      CLIENT_HISTORY_KEY,
+      JSON.stringify(history.slice(0, 10))
+    );
+  } catch(e) {
+    console.log("Historique indisponible");
+  }
+}
+
+function showClientFavorites() {
+  const ids = [...favorites];
+  displayClientCars(ids, "Mes véhicules favoris");
+}
+
+function showClientHistory() {
+  let ids = [];
+  try {
+    ids = JSON.parse(
+      localStorage.getItem(CLIENT_HISTORY_KEY) || "[]"
+    );
+  } catch(e) {}
+  displayClientCars(ids, "Mes derniers véhicules consultés");
+}
+
+function displayClientCars(ids, title) {
+  const found = cars.filter(car => ids.includes(car.id));
+
+  $("clientStats").textContent =
+    title + " : " + found.length + " véhicule(s).";
+
+  $("clientResults").innerHTML =
+    found.length
+      ? found.map(card).join("")
+      : '<p class="empty">Aucun véhicule à afficher pour le moment.</p>';
+}
+</script>
+
 </main>
 
 <footer>
@@ -519,6 +691,7 @@ $("soldCars").innerHTML=cars.filter(c=>c.status==="sold").map(card).join("");
 }
 
 function showDetails(id){
+saveClientVisit(id);
 const car=cars.find(c=>String(c.id)===String(id));
 if(!car)return;
 const photos=car.images||[];
