@@ -1,562 +1,299 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080808">
-<title>CROWN ADMIN PREMIUM</title>
-
+<title>CROWN MOTORS PREMIUM | Admin</title>
 <style>
-:root{
-  --gold:#d8b45d;
-  --black:#080808;
-  --panel:#171717;
-  --muted:#aaa;
-  --line:#493a20;
-  --green:#167b4b;
-  --red:#a51d42;
-}
+:root{--gold:#d8b45d;--bg:#080808;--panel:#171717;--muted:#aaa}
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--black);
-  color:white;font-family:Arial,sans-serif;
-}
-header{
-  padding:20px;
-  background:#111;
-  border-bottom:2px solid var(--gold);
-  display:flex;justify-content:space-between;
-  align-items:center;gap:12px;flex-wrap:wrap;
-}
-h1{
-  margin:0;color:var(--gold);
-  font:25px Georgia,serif;letter-spacing:3px;
-}
-header p{color:var(--muted);font-size:11px}
+body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif}
+header{padding:20px;background:#111;border-bottom:1px solid var(--gold);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font:24px Georgia;color:var(--gold);margin:0}
+header small{color:#aaa}
 main{max-width:1100px;margin:auto;padding:20px}
-h2{color:var(--gold);font:25px Georgia,serif}
-h3{color:var(--gold)}
-.dashboard{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.card,.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:12px;padding:18px;
-}
-.card strong{
-  display:block;color:var(--gold);
-  font-size:25px;margin-bottom:6px;
-}
-.card span{font-size:11px;color:var(--muted)}
+h2{color:var(--gold);font:25px Georgia}
+button,input,select,textarea{font:inherit}
+button{padding:12px;border:1px solid var(--gold);border-radius:7px;background:var(--gold);color:#111;font-weight:bold;cursor:pointer}
+.secondary{background:#191919;color:var(--gold)}
+.danger{background:#7d2020;color:white;border-color:#7d2020}
+.dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card,.panel{background:var(--panel);border:1px solid #57451e;border-radius:10px;padding:17px}
+.card strong{display:block;font-size:27px;color:var(--gold)}
+.card span{font-size:12px;color:#aaa}
 .panel{margin-top:22px}
-.form-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.field{display:flex;flex-direction:column;gap:7px}
-.field.full{grid-column:1/-1}
-label{font-size:12px;color:var(--gold)}
-input,select,textarea{
-  width:100%;padding:13px;
-  border:1px solid #51452d;border-radius:7px;
-  background:#222;color:white;font:14px Arial;
-}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+input,select,textarea{width:100%;padding:13px;background:#242424;border:1px solid #51452d;color:white;border-radius:7px}
 textarea{min-height:90px;resize:vertical}
-button{
-  padding:12px 16px;border:1px solid var(--gold);
-  border-radius:7px;background:var(--gold);
-  color:#111;font-weight:bold;cursor:pointer;
-}
-button.secondary{
-  background:#171717;color:var(--gold);
-}
-button.danger{
-  background:var(--red);color:white;border-color:var(--red);
-}
-button.green{background:var(--green);color:white;border-color:var(--green)}
-.actions{
-  display:flex;flex-wrap:wrap;gap:9px;margin-top:15px;
-}
-.car-list{display:grid;gap:10px;margin-top:15px}
-.car-item{
-  display:flex;justify-content:space-between;
-  align-items:center;gap:12px;flex-wrap:wrap;
-  padding:14px;background:#202020;
-  border:1px solid var(--line);border-radius:9px;
-}
-.car-item img{
-  width:75px;height:55px;object-fit:cover;
-  border-radius:6px;background:#333;
-}
-.car-info{flex:1;min-width:150px}
-.car-info strong{display:block}
-.car-info small{color:var(--muted)}
-.car-actions{display:flex;gap:7px;flex-wrap:wrap}
-.car-actions button{font-size:11px;padding:9px}
-.badge{
-  display:inline-block;padding:4px 8px;
-  border-radius:20px;font-size:10px;
-  background:#333;color:white;
-}
-.notice{
-  padding:15px;margin-top:20px;
-  border:1px solid var(--line);
-  border-radius:8px;color:#bbb;
-  font-size:12px;line-height:1.7;
-}
-.empty{text-align:center;color:#aaa;padding:25px}
-footer{
-  text-align:center;padding:25px;
-  color:#777;font-size:11px;
-}
-@media(max-width:700px){
-  .dashboard{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:450px){
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  main{padding:13px}
+label{font-size:12px;color:var(--gold);display:block;margin-bottom:5px}
+.field{min-width:0}
+.full{grid-column:1/-1}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.vehicle{padding:14px;margin-top:12px;background:#202020;border:1px solid #51452d;border-radius:9px;display:flex;gap:14px;align-items:center}
+.vehicle img{width:100px;height:75px;object-fit:cover;border-radius:6px;background:#333}
+.vehicle-info{flex:1;min-width:0}
+.vehicle-info strong{color:var(--gold)}
+.vehicle-info small{display:block;color:#aaa;margin-top:5px}
+.vehicle-actions{display:flex;gap:6px;flex-wrap:wrap}
+.notice{color:#bbb;font-size:12px;line-height:1.6;margin-top:15px}
+.hidden{display:none}
+#search{margin-top:12px}
+footer{text-align:center;padding:25px;color:#777;font-size:11px}
+@media(max-width:600px){
+.dashboard{grid-template-columns:repeat(2,1fr)}
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.vehicle{align-items:flex-start;flex-wrap:wrap}
+.vehicle img{width:85px;height:70px}
+.vehicle-actions{width:100%}
+.vehicle-actions button{flex:1}
 }
 </style>
 </head>
-
 <body>
-
 <header>
-  <div>
-    <h1>♛ CROWN MOTORS</h1>
-    <p>PREMIUM ADMINISTRATION</p>
-  </div>
-  <button class="secondary"
-    onclick="location.href='index.html'">
-    Voir le site ↗
-  </button>
+<div>
+<h1>♛ CROWN MOTORS</h1>
+<small>PREMIUM ADMINISTRATION</small>
+</div>
+<button class="secondary" onclick="location.href='index.html'">Voir le site ↗</button>
 </header>
 
 <main>
-
 <h2>Tableau de bord</h2>
 
 <div class="dashboard">
-  <div class="card">
-    <strong id="totalCars">0</strong>
-    <span>Total véhicules</span>
-  </div>
-  <div class="card">
-    <strong id="availableCars">0</strong>
-    <span>Disponibles</span>
-  </div>
-  <div class="card">
-    <strong id="reservedCars">0</strong>
-    <span>Réservés</span>
-  </div>
-  <div class="card">
-    <strong id="soldCars">0</strong>
-    <span>Vendus</span>
-  </div>
+<div class="card"><strong id="total">0</strong><span>Total véhicules</span></div>
+<div class="card"><strong id="available">0</strong><span>Disponibles</span></div>
+<div class="card"><strong id="reserved">0</strong><span>Réservés</span></div>
+<div class="card"><strong id="sold">0</strong><span>Vendus</span></div>
+<div class="card"><strong id="favorites">0</strong><span>Véhicules enregistrés</span></div>
+<div class="card"><strong>FCFA</strong><span>Devise</span></div>
 </div>
 
-<section class="panel" id="editor">
-  <h2 id="formTitle">Ajouter un véhicule</h2>
+<section class="panel">
+<h2 id="formTitle">＋ Ajouter un véhicule</h2>
+<form id="carForm">
+<input type="hidden" id="carId">
 
-  <form id="carForm">
-    <div class="form-grid">
+<div class="form-grid">
+<div class="field">
+<label>Nom du véhicule *</label>
+<input id="name" required placeholder="Toyota Camry">
+</div>
+<div class="field">
+<label>Marque *</label>
+<input id="make" required placeholder="Toyota">
+</div>
+<div class="field">
+<label>Prix en FCFA *</label>
+<input id="price" type="number" min="0" required placeholder="5000000">
+</div>
+<div class="field">
+<label>Année *</label>
+<input id="year" type="number" min="1900" max="2100" required placeholder="2020">
+</div>
+<div class="field">
+<label>Catégorie</label>
+<select id="category">
+<option>Berline</option>
+<option>SUV</option>
+<option>Coupé</option>
+<option>Pick-up</option>
+<option>4x4</option>
+<option>Utilitaire</option>
+</select>
+</div>
+<div class="field">
+<label>Carburant</label>
+<select id="fuel">
+<option>Essence</option>
+<option>Diesel</option>
+<option>Hybride</option>
+<option>Électrique</option>
+</select>
+</div>
+<div class="field">
+<label>Transmission</label>
+<select id="transmission">
+<option>Automatique</option>
+<option>Manuelle</option>
+</select>
+</div>
+<div class="field">
+<label>Couleur</label>
+<input id="color" placeholder="Noir">
+</div>
+<div class="field">
+<label>Statut</label>
+<select id="status">
+<option value="available">Disponible</option>
+<option value="reserved">Réservé</option>
+<option value="sold">Vendu</option>
+</select>
+</div>
+<div class="field">
+<label>Adresse de la photo (URL)</label>
+<input id="image" type="url" placeholder="https://...">
+</div>
+<div class="field full">
+<label>Description</label>
+<textarea id="description" placeholder="Décrivez le véhicule..."></textarea>
+</div>
+</div>
 
-      <div class="field">
-        <label>Nom du véhicule *</label>
-        <input name="name" required
-          placeholder="Toyota RAV4">
-      </div>
-
-      <div class="field">
-        <label>Marque *</label>
-        <input name="make" required
-          placeholder="Toyota">
-      </div>
-
-      <div class="field">
-        <label>Prix en FCFA *</label>
-        <input name="price" type="number"
-          min="0" required placeholder="8000000">
-      </div>
-
-      <div class="field">
-        <label>Année *</label>
-        <input name="year" type="number"
-          min="1900" required placeholder="2022">
-      </div>
-
-      <div class="field">
-        <label>Catégorie</label>
-        <select name="category">
-          <option>Berline</option>
-          <option>SUV</option>
-          <option>Coupé</option>
-          <option>4x4</option>
-          <option>Pick-up</option>
-          <option>Utilitaire</option>
-          <option>Autre</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Carburant</label>
-        <select name="fuel">
-          <option>Essence</option>
-          <option>Diesel</option>
-          <option>Hybride</option>
-          <option>Électrique</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Transmission</label>
-        <select name="transmission">
-          <option>Automatique</option>
-          <option>Manuelle</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Couleur</label>
-        <input name="color" placeholder="Noir">
-      </div>
-
-      <div class="field">
-        <label>Disponibilité</label>
-        <select name="status">
-          <option value="available">Disponible</option>
-          <option value="reserved">Réservé</option>
-          <option value="sold">Vendu</option>
-        </select>
-      </div>
-
-      <div class="field full">
-        <label>Photos (une URL par ligne)</label>
-        <textarea name="images"
-          placeholder="https://exemple.com/photo1.jpg&#10;https://exemple.com/photo2.jpg"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Description</label>
-        <textarea name="description"
-          placeholder="Décrivez le véhicule..."></textarea>
-      </div>
-
-    </div>
-
-    <div class="actions">
-      <button type="submit" id="saveButton">
-        ＋ Enregistrer le véhicule
-      </button>
-      <button type="button" class="secondary"
-        onclick="resetForm()">
-        Annuler
-      </button>
-    </div>
-  </form>
+<div class="actions">
+<button type="submit">Enregistrer le véhicule</button>
+<button type="button" class="secondary" id="cancelEdit">Annuler</button>
+</div>
+</form>
+<p class="notice">Les modifications sont enregistrées dans le navigateur de cette tablette. Elles ne sont pas encore synchronisées avec le catalogue public ni avec les autres appareils.</p>
 </section>
 
 <section class="panel">
-  <h2>Gestion du catalogue</h2>
-
-  <input id="searchAdmin" type="search"
-    placeholder="Rechercher un véhicule...">
-
-  <div class="car-list" id="adminCarList"></div>
+<h2>▣ Gestion du catalogue</h2>
+<input id="search" type="search" placeholder="Rechercher un véhicule...">
+<div id="vehicleList"></div>
 </section>
 
 <section class="panel">
-  <h2>Sauvegarde du catalogue</h2>
-
-  <p style="color:#aaa;font-size:12px">
-    Exportez vos véhicules pour conserver une sauvegarde
-    ou transférez vos modifications vers un autre appareil.
-  </p>
-
-  <div class="actions">
-    <button class="green" onclick="exportCars()">
-      ↓ Exporter le catalogue JSON
-    </button>
-
-    <button class="secondary"
-      onclick="document.getElementById('importFile').click()">
-      ↑ Importer une sauvegarde
-    </button>
-
-    <input type="file" id="importFile"
-      accept=".json,application/json" hidden>
-  </div>
-</section>
-
-<div class="notice">
-  <strong style="color:var(--gold)">
-    IMPORTANT — CROWN ADMIN
-  </strong>
-  <br>
-  Cette version conserve les modifications dans le navigateur
-  utilisé. Elle ne synchronise pas encore le catalogue public
-  entre les visiteurs.
-  <br><br>
-  Ne considérez pas cette page comme une administration sécurisée :
-  elle est accessible publiquement tant qu'une authentification
-  serveur n'est pas installée.
-  <br><br>
-  Effectuez régulièrement des sauvegardes JSON.
+<h2>⇧ Sauvegarde</h2>
+<p class="notice">Télécharge une copie de tes véhicules pour conserver tes données.</p>
+<div class="actions">
+<button id="export">Exporter les véhicules</button>
+<button class="secondary" id="importButton">Importer une sauvegarde</button>
+<input class="hidden" id="importFile" type="file" accept=".json,application/json">
 </div>
-
+</section>
 </main>
 
-<footer>
-© 2026 CROWN MOTORS PREMIUM — ADMINISTRATION
-</footer>
+<footer>© <span id="yearNow"></span> CROWN MOTORS PREMIUM</footer>
 
 <script src="./js/catalogue.js"></script>
-
 <script>
 "use strict";
 
-const STORAGE_KEY = "crown_admin_catalogue_v1";
+const KEY="crownMotorsAdminVehicles";
+const original=window.CROWN_CARS||[];
+let vehicles=loadVehicles();
 
-let cars = [];
-let editingId = null;
-
-const $ = id => document.getElementById(id);
-
-function loadCars(){
-  try{
-    const saved = localStorage.getItem(STORAGE_KEY);
-
-    if(saved){
-      const parsed = JSON.parse(saved);
-      if(!Array.isArray(parsed)) throw new Error();
-      cars = parsed;
-    }else{
-      cars = Array.isArray(window.CROWN_CARS)
-        ? window.CROWN_CARS.map(car => ({...car}))
-        : [];
-      saveCars();
-    }
-  }catch(error){
-    cars = Array.isArray(window.CROWN_CARS)
-      ? window.CROWN_CARS.map(car => ({...car}))
-      : [];
-    alert("Impossible de lire la sauvegarde. Vérifiez vos données.");
-  }
+function loadVehicles(){
+try{
+const saved=localStorage.getItem(KEY);
+if(saved)return JSON.parse(saved);
+return original.map(c=>({...c}));
+}catch(e){return original.map(c=>({...c}));}
 }
 
-function saveCars(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(cars));
+function save(){
+localStorage.setItem(KEY,JSON.stringify(vehicles));
+render();
 }
 
-function safeText(value){
-  return String(value ?? "");
-}
-
-function escapeHTML(value){
-  return safeText(value).replace(/[&<>"']/g,char=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[char]);
-}
+const $=id=>document.getElementById(id);
+const format=n=>new Intl.NumberFormat("fr-FR").format(Number(n)||0)+" FCFA";
 
 function render(){
-  const available = cars.filter(c=>c.status==="available").length;
-  const reserved = cars.filter(c=>c.status==="reserved").length;
-  const sold = cars.filter(c=>c.status==="sold").length;
+$("total").textContent=vehicles.length;
+$("available").textContent=vehicles.filter(v=>v.status==="available").length;
+$("reserved").textContent=vehicles.filter(v=>v.status==="reserved").length;
+$("sold").textContent=vehicles.filter(v=>v.status==="sold").length;
+$("favorites").textContent=vehicles.length;
 
-  $("totalCars").textContent = cars.length;
-  $("availableCars").textContent = available;
-  $("reservedCars").textContent = reserved;
-  $("soldCars").textContent = sold;
+const q=$("search").value.toLowerCase();
+const list=vehicles.filter(v=>(v.name+" "+v.make).toLowerCase().includes(q));
 
-  const query = $("searchAdmin").value.toLowerCase();
-
-  const filtered = cars.filter(car=>
-    (car.name+" "+car.make).toLowerCase().includes(query)
-  );
-
-  $("adminCarList").innerHTML = filtered.length
-    ? filtered.map(car=>{
-      const image = car.images && car.images[0]
-        ? `<img src="${escapeHTML(car.images[0])}" alt="">`
-        : `<img alt="Sans photo">`;
-
-      const status = {
-        available:"Disponible",
-        reserved:"Réservé",
-        sold:"Vendu"
-      }[car.status] || "Non défini";
-
-      return `
-      <div class="car-item">
-        ${image}
-        <div class="car-info">
-          <strong>${escapeHTML(car.name)}</strong>
-          <small>
-            ${escapeHTML(car.make)} ·
-            ${Number(car.year)||"—"} ·
-            ${Number(car.price).toLocaleString("fr-FR")} FCFA
-          </small>
-          <br><span class="badge">${status}</span>
-        </div>
-        <div class="car-actions">
-          <button class="secondary"
-            onclick="editCar('${escapeHTML(car.id)}')">
-            Modifier
-          </button>
-          <button class="danger"
-            onclick="deleteCar('${escapeHTML(car.id)}')">
-            Supprimer
-          </button>
-        </div>
-      </div>`;
-    }).join("")
-    : '<p class="empty">Aucun véhicule trouvé.</p>';
+$("vehicleList").innerHTML=list.map(v=>`
+<div class="vehicle">
+<img src="${safe(v.images?.[0]||v.image||"")}" alt="" onerror="this.style.display='none'">
+<div class="vehicle-info">
+<strong>${safe(v.name)}</strong>
+<div>${format(v.price)}</div>
+<small>${safe(v.year)} · ${safe(v.category)} · ${safe(v.status)}</small>
+</div>
+<div class="vehicle-actions">
+<button class="secondary" data-edit="${safe(v.id)}">Modifier</button>
+<button class="danger" data-delete="${safe(v.id)}">Supprimer</button>
+</div>
+</div>`).join("")||'<p class="notice">Aucun véhicule trouvé.</p>';
 }
 
-$("carForm").addEventListener("submit",function(event){
-  event.preventDefault();
-
-  const data = new FormData(this);
-
-  const car = {
-    id: editingId || "crown-" + Date.now(),
-    name: data.get("name").trim(),
-    make: data.get("make").trim(),
-    price: Number(data.get("price")),
-    year: Number(data.get("year")),
-    category: data.get("category"),
-    fuel: data.get("fuel"),
-    transmission: data.get("transmission"),
-    color: data.get("color").trim(),
-    status: data.get("status"),
-    images: data.get("images")
-      .split(/\n/)
-      .map(url=>url.trim())
-      .filter(url=>/^https?:\/\//i.test(url)),
-    description: data.get("description").trim()
-  };
-
-  if(!car.name || !car.make || car.price<0 ||
-     !Number.isFinite(car.price) ||
-     !Number.isInteger(car.year)){
-    alert("Vérifiez les informations obligatoires.");
-    return;
-  }
-
-  if(editingId){
-    cars = cars.map(old=>old.id===editingId?car:old);
-  }else{
-    cars.push(car);
-  }
-
-  saveCars();
-  resetForm();
-  render();
-
-  alert("Véhicule enregistré dans cet appareil.");
-});
-
-function editCar(id){
-  const car = cars.find(c=>String(c.id)===String(id));
-  if(!car)return;
-
-  editingId = car.id;
-
-  const form = $("carForm");
-
-  Object.keys(car).forEach(key=>{
-    if(form.elements[key]){
-      form.elements[key].value =
-        key==="images" ? (car.images||[]).join("\n")
-        : car[key] ?? "";
-    }
-  });
-
-  $("formTitle").textContent = "Modifier un véhicule";
-  $("saveButton").textContent = "Enregistrer les modifications";
-
-  $("editor").scrollIntoView({behavior:"smooth"});
-}
-
-function deleteCar(id){
-  if(!confirm("Confirmer la suppression de ce véhicule ?"))return;
-
-  cars = cars.filter(c=>String(c.id)!==String(id));
-  saveCars();
-  render();
-
-  if(String(editingId)===String(id))resetForm();
+function safe(value){
+return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
 function resetForm(){
-  editingId = null;
-  $("carForm").reset();
-  $("formTitle").textContent = "Ajouter un véhicule";
-  $("saveButton").textContent = "＋ Enregistrer le véhicule";
+$("carForm").reset();
+$("carId").value="";
+$("formTitle").textContent="＋ Ajouter un véhicule";
 }
 
-function exportCars(){
-  const blob = new Blob(
-    [JSON.stringify(cars,null,2)],
-    {type:"application/json"}
-  );
-
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "crown-motors-catalogue.json";
-  link.click();
-
-  URL.revokeObjectURL(url);
-}
-
-$("importFile").addEventListener("change",async function(){
-  const file = this.files[0];
-  if(!file)return;
-
-  try{
-    const imported = JSON.parse(await file.text());
-
-    if(!Array.isArray(imported) ||
-       !imported.every(c=>
-         c && typeof c.name==="string" &&
-         typeof c.id!=="undefined"
-       )){
-      throw new Error("Format incorrect");
-    }
-
-    if(!confirm("Remplacer le catalogue actuel par cette sauvegarde ?")){
-      this.value="";
-      return;
-    }
-
-    cars = imported;
-    saveCars();
-    resetForm();
-    render();
-
-    alert("Catalogue importé avec succès.");
-  }catch(error){
-    alert("Fichier JSON invalide.");
-  }
-
-  this.value="";
+$("carForm").addEventListener("submit",e=>{
+e.preventDefault();
+const id=$("carId").value||("cm-"+Date.now());
+const old=vehicles.find(v=>String(v.id)===id);
+const image=$("image").value.trim();
+const data={
+id,name:$("name").value.trim(),make:$("make").value.trim(),
+price:Number($("price").value),year:Number($("year").value),
+category:$("category").value,fuel:$("fuel").value,
+transmission:$("transmission").value,color:$("color").value.trim(),
+status:$("status").value,description:$("description").value.trim(),
+images:image?[image]:(old?.images||[])
+};
+if(old)vehicles=vehicles.map(v=>String(v.id)===id?data:v);
+else vehicles.push(data);
+save();
+resetForm();
+alert("Véhicule enregistré sur cette tablette.");
 });
 
-$("searchAdmin").addEventListener("input",render);
+$("vehicleList").addEventListener("click",e=>{
+const edit=e.target.closest("[data-edit]");
+const del=e.target.closest("[data-delete]");
+if(edit){
+const v=vehicles.find(x=>String(x.id)===edit.dataset.edit);
+if(!v)return;
+$("carId").value=v.id;
+["name","make","price","year","category","fuel","transmission","color","status","description"].forEach(k=>$(k).value=v[k]??"");
+$("image").value=v.images?.[0]||v.image||"";
+$("formTitle").textContent="✎ Modifier un véhicule";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+if(del&&confirm("Supprimer ce véhicule ?")){
+vehicles=vehicles.filter(v=>String(v.id)!==del.dataset.delete);
+save();
+}
+});
 
-loadCars();
+$("cancelEdit").onclick=resetForm;
+$("search").oninput=render;
+
+$("export").onclick=()=>{
+const blob=new Blob([JSON.stringify(vehicles,null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download="crown-motors-sauvegarde.json";a.click();
+URL.revokeObjectURL(url);
+};
+
+$("importButton").onclick=()=>$("importFile").click();
+$("importFile").onchange=async e=>{
+const file=e.target.files[0];
+if(!file)return;
+try{
+const data=JSON.parse(await file.text());
+if(!Array.isArray(data))throw Error("Format incorrect");
+vehicles=data;
+save();
+alert("Sauvegarde importée.");
+}catch(err){alert("Fichier invalide.");}
+e.target.value="";
+};
+
+$("yearNow").textContent=new Date().getFullYear();
 render();
-
 </script>
 </body>
 </html>
